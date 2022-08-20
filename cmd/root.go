@@ -25,7 +25,6 @@ func Execute() {
 	completion.DeployShellCompletionFileIfNeeded(rootCmd)
 
 	if err := rootCmd.Execute(); err != nil {
-		print.Err(err)
 		os.Exit(1)
 	}
 }
