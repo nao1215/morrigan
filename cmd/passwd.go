@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"errors"
+
+	"github.com/nao1215/morrigan/internal/print"
 	"github.com/spf13/cobra"
 )
 
@@ -25,5 +28,26 @@ func init() {
 }
 
 func passwd(cmd *cobra.Command, args []string) error {
+	if len(args) != 1 {
+		return errors.New("passwd subcommand need one argument (=username)")
+	}
+
+	scoreMode, err := cmd.Flags().GetBool("score")
+	if err != nil {
+		print.Fatal(err)
+		return errors.New("can not parse command line argument (--score)")
+	}
+
+	if scoreMode {
+		return score(args[0])
+	}
+	return crack(args[0])
+}
+
+func score(username string) error {
+	return nil
+}
+
+func crack(username string) error {
 	return nil
 }
