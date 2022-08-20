@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"errors"
-	"fmt"
 	"os"
+	"regexp"
+	"strings"
+	"unicode"
 
 	"github.com/nao1215/morrigan/internal/embedded"
 	"github.com/nao1215/morrigan/internal/interactive"
@@ -53,23 +55,97 @@ func passwd(cmd *cobra.Command, args []string) error {
 }
 
 func score(username string) error {
-
 	passwd, err := interactive.ReadPassword()
 	if err != nil {
 		return err
 	}
 
+	if err := validWeakPasswd(passwd); err != nil {
+		return nil
+	}
+	validLength(passwd)
+	validContainUserName(username, passwd)
+	validContainNumber(passwd)
+	validContainLowerAndUpper(passwd)
+	validContainSymbol(passwd)
+	return nil
+}
+
+func validWeakPasswd(passwd string) error {
 	list, err := embedded.WeakPasswdList()
 	if err != nil {
 		return err
 	}
 	for _, v := range list {
 		if v == passwd {
-			fmt.Println("out")
-			break
+			print.Warn("[Weak password or not] NG (Included in the weak password list)")
+			return nil
 		}
 	}
+	print.Info("[Weak password or not] OK")
 	return nil
+}
+
+func validContainUserName(username, passwd string) {
+	if strings.Contains(strings.ToLower(passwd), strings.ToLower(username)) {
+		print.Warn("[Not contain name    ] NG (Better not to contain user name)")
+		return
+	}
+	print.Warn("[Not contain name    ] OK")
+}
+
+func validContainNumber(passwd string) {
+	re := regexp.MustCompile("[0-9]+")
+	if !re.Match([]byte(passwd)) {
+		print.Warn("[Contains number     ] NG (Better to include number)")
+		return
+	}
+	print.Info("[Contains number     ] OK")
+}
+
+func validContainLowerAndUpper(passwd string) {
+	r := []rune(passwd)
+
+	upper := false
+	lower := false
+	for _, v := range r {
+		if unicode.IsUpper(v) {
+			upper = true
+			continue
+		}
+		if unicode.IsLower(v) {
+			lower = true
+			continue
+		}
+	}
+
+	if !lower {
+		print.Warn("[Contains upper&lower] NG (Better to include lower character)")
+		return
+	}
+
+	if !upper {
+		print.Warn("[Contains upper&lower] NG (Better to include upper character)")
+		return
+	}
+	print.Info("[Contains upper&lower] OK")
+}
+
+func validLength(passwd string) {
+	if len(passwd) < 15 {
+		print.Warn("[Length              ] NG (15 characters or more is recommended)")
+		return
+	}
+	print.Info("[Length              ] OK")
+}
+
+func validContainSymbol(passwd string) {
+	re := regexp.MustCompile("[[:punct:]]|\\.|\\|\\?|-|\\!|\\,|\\@|\\,|\\#|\\$|\\%|\\^|\\&|\\*|\\_|\\~")
+	if !re.Match([]byte(passwd)) {
+		print.Warn("[Contains symbol     ] NG (Better to include symbol)")
+		return
+	}
+	print.Info("[Contains symbol     ] OK")
 }
 
 func crack(username string) error {
