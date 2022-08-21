@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 // ReadPassword get password from terminal (stdin).
@@ -17,19 +17,19 @@ func ReadPassword() (string, error) {
 	defer signal.Stop(signalChan)
 
 	// Get terminal state before password input
-	currentState, err := terminal.GetState(int(syscall.Stdin))
+	currentState, err := term.GetState(int(syscall.Stdin))
 	if err != nil {
 		return "", fmt.Errorf("%s: %w", "can not restore terminal state", err)
 	}
 
 	go func() {
 		<-signalChan
-		terminal.Restore(int(syscall.Stdin), currentState)
+		term.Restore(int(syscall.Stdin), currentState)
 		os.Exit(1)
 	}()
 
 	fmt.Printf("Enter password: ")
-	passwd, err := terminal.ReadPassword(syscall.Stdin)
+	passwd, err := term.ReadPassword(syscall.Stdin)
 	fmt.Println("")
 	if err != nil {
 		return "", fmt.Errorf("%s: %w", "can not read password from stdin", err)
