@@ -30,6 +30,8 @@ jobs:
           reporter: github-pr-review
           level: warning
           locale: "US"
+          exclude: |
+            ./internal/embedded/passwd/weak.txt
 
   actionlint:
     runs-on: ubuntu-latest
