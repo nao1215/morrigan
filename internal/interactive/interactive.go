@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/nao1215/morrigan/internal/print"
 	"golang.org/x/term"
 )
 
@@ -24,7 +25,9 @@ func ReadPassword() (string, error) {
 
 	go func() {
 		<-signalChan
-		term.Restore(int(syscall.Stdin), currentState)
+		if err := term.Restore(int(syscall.Stdin), currentState); err != nil {
+			print.Fatal(fmt.Errorf("%s: %w", "can not restore terminal state", err))
+		}
 		os.Exit(1)
 	}()
 
