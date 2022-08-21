@@ -13,7 +13,7 @@ import (
 // ReadPassword get password from terminal (stdin).
 func ReadPassword() (string, error) {
 	// Get Ctrl-C (Interrupt) signal
-	signalChan := make(chan os.Signal)
+	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt)
 	defer signal.Stop(signalChan)
 
