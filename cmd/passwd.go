@@ -140,7 +140,7 @@ func validLength(passwd string) {
 }
 
 func validContainSymbol(passwd string) {
-	re := regexp.MustCompile("[[:punct:]]|\\.|\\|\\?|-|\\!|\\,|\\@|\\,|\\#|\\$|\\%|\\^|\\&|\\*|\\_|\\~")
+	re := regexp.MustCompile(`[[:punct:]]|\.|\|\?|-|\!|\,|\@|\,|\#|\$|\%|\^|\&|\*|\_|\~`)
 	if !re.Match([]byte(passwd)) {
 		print.Warn("[Contains symbol     ] NG (Better to include symbol)")
 		return
