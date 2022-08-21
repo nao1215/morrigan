@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode"
 
@@ -149,8 +151,93 @@ func validContainSymbol(passwd string) {
 }
 
 func crack(username string) error {
-	if !system.IsRootUser() {
-		return errors.New("passwd subcommand crack-mode (default) needs root privileges")
+	unshadowList, err := unshadow()
+	if err != nil {
+		return fmt.Errorf("%s: %w", "can not generate unshadow from /etc/passwd and /etc/shadow", err)
+	}
+
+	if !existUser(unshadowList, username) {
+		return errors.New(username + " does not exist in the system")
+	}
+
+	for _, v := range unshadowList {
+		fields := strings.Split(v, ":")
+
+		if fields[0] != username {
+			continue
+		}
+
+		if fields[1] == "*" {
+			print.Info(username + " is temporarily disabled user")
+			break
+		}
+
+		if fields[1] == "" {
+			print.Info(username + " has not set the password")
+			break
+		}
+
+		if err := compareChecksums(fields[1]); err != nil {
+			return err
+		}
+		break
 	}
 	return nil
+}
+
+// unshadow replaces the second field (password) in /etc/passwd with
+// the second field (encrypted password) in /etc/shadow.
+func unshadow() ([]string, error) {
+	passwdList, err := system.ReadEtcPasswdFile()
+	if err != nil {
+		return nil, err
+	}
+
+	shadowList, err := system.ReadEtcShadowFile()
+	if err != nil {
+		return nil, err
+	}
+
+	sort.Strings(passwdList)
+	sort.Strings(shadowList)
+
+	var unshadowList []string
+	for i, v := range passwdList {
+		if len(v) == 0 {
+			continue
+		}
+
+		unshadow := v
+		passwdfields := strings.Split(v, ":")
+		if passwdfields[1] == "x" {
+			shadowFields := strings.Split(shadowList[i], ":")
+			unshadow = passwdfields[0] + ":" + shadowFields[1] + strings.Join(passwdfields[2:], ":")
+		}
+		unshadowList = append(unshadowList, unshadow)
+	}
+	return unshadowList, nil
+}
+
+func existUser(unshadowList []string, username string) bool {
+	for _, v := range unshadowList {
+		fields := strings.Split(v, ":")
+		if fields[0] == username {
+			return true
+		}
+	}
+	return false
+}
+
+func compareChecksums(encryptedPasswd string) error {
+	if strings.HasPrefix(encryptedPasswd, "$1$") {
+		print.Info("[WIP] md5sum. not implement")
+		return nil
+	} else if strings.HasPrefix(encryptedPasswd, "$5$") {
+		print.Info("[WIP] sha256sum.  not implement")
+		return nil
+	} else if strings.HasPrefix(encryptedPasswd, "$6$") {
+		print.Info("[WIP] sha256sum.  not implement")
+		return nil
+	}
+	return errors.New("encrypted password=" + encryptedPasswd + " is unknown checksum format")
 }
