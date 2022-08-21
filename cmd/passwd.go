@@ -106,11 +106,9 @@ func validContainNumber(passwd string) {
 }
 
 func validContainLowerAndUpper(passwd string) {
-	r := []rune(passwd)
-
 	upper := false
 	lower := false
-	for _, v := range r {
+	for _, v := range passwd {
 		if unicode.IsUpper(v) {
 			upper = true
 			continue
