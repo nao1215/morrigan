@@ -68,6 +68,8 @@ func score(username string) error {
 	validContainNumber(passwd)
 	validContainLowerAndUpper(passwd)
 	validContainSymbol(passwd)
+
+	//TODO: Calculate entropy as a measure of password strength
 	return nil
 }
 
