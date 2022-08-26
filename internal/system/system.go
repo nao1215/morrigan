@@ -70,7 +70,7 @@ func Unshadow(passwdList, shadowList []string) ([]string, error) {
 			return nil, errors.New("users do not match in /etc/passwd and /etc/shadow")
 		}
 
-		unshadow := passwdfields[0] + ":" + shadowFields[1] + strings.Join(passwdfields[2:], ":")
+		unshadow := passwdfields[0] + ":" + shadowFields[1] + ":" + strings.Join(passwdfields[2:], ":")
 		unshadowList = append(unshadowList, unshadow)
 	}
 	return unshadowList, nil
