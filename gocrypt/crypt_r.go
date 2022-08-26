@@ -39,24 +39,24 @@ import "C"
 // Crypt provides a wrapper around the glibc crypt_r() function.
 // For the meaning of the arguments, refer to the package README.
 func Crypt(pass, salt string) (string, error) {
-	c_pass := C.CString(pass)
-	defer C.free(unsafe.Pointer(c_pass))
+	cPass := C.CString(pass)
+	defer C.free(unsafe.Pointer(cPass))
 
-	c_salt := C.CString(salt)
-	defer C.free(unsafe.Pointer(c_salt))
+	cSalt := C.CString(salt)
+	defer C.free(unsafe.Pointer(cSalt))
 
-	c_enc, err := C.gnu_ext_crypt(c_pass, c_salt)
-	if c_enc == nil {
+	cEnc, err := C.gnu_ext_crypt(cPass, cSalt)
+	if cEnc == nil {
 		return "", err
 	}
-	defer C.free(unsafe.Pointer(c_enc))
+	defer C.free(unsafe.Pointer(cEnc))
 
 	// From the crypt(3) man-page. Upon error, crypt_r writes an invalid
 	// hashed passphrase to the output field of their data argument, and
 	// crypt writes an invalid hash to its static storage area. This
 	// string will be shorter than 13 characters, will begin with a ‘*’,
 	// and will not compare equal to setting.
-	hash := C.GoString(c_enc)
+	hash := C.GoString(cEnc)
 	if len(hash) > 0 && hash[0] == '*' {
 		// Make sure we actually return an error, musl e.g. does not
 		// set errno in all cases here.

@@ -26,6 +26,6 @@ import "C"
 // This function is specific to the tests. It basically checks if
 // we're running with glibc and if the used glibc is new enough
 func checkGlibCVersion() bool {
-	c_minor := C.get_glibc_minor_version()
-	return c_minor >= 17
+	cMinor := C.get_glibc_minor_version()
+	return cMinor >= 17
 }
