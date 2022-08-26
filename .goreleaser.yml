@@ -10,14 +10,12 @@ builds:
     ldflags:
       - -s -w -X morrigan/internal/cmdinfo.Version=v{{ .Version }}
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
     goos:
       - linux
-      - darwin
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     replacements:
-      darwin: Darwin
       linux: Linux
       386: i386
       amd64: x86_64
