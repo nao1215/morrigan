@@ -58,7 +58,7 @@ func Crypt(pass, salt string) (string, error) {
 	// and will not compare equal to setting.
 	hash := C.GoString(c_enc)
 	if len(hash) > 0 && hash[0] == '*' {
-		// Make sure we acutally return an error, musl e.g. does not
+		// Make sure we actually return an error, musl e.g. does not
 		// set errno in all cases here.
 		if err == nil {
 			err = syscall.EINVAL
