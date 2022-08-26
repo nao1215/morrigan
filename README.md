@@ -1,3 +1,7 @@
+[![Build](https://github.com/nao1215/morrigan/actions/workflows/build.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/build.yml)
+[![UnitTest](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml)
+[![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
 # morrigan - [WIP] Penetration Tool Set
 morrigan command is a tool-set to verify the vulnerability of services developed by you. It is not a tool to attack services on the network. As part of the developer's (it's me) study of security, I will be adding subcommands regarding penetration.  
   
