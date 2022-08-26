@@ -1,5 +1,6 @@
 [![Build](https://github.com/nao1215/morrigan/actions/workflows/build.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/build.yml)
 [![UnitTest](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml)
+[![codecov](https://codecov.io/gh/nao1215/morrigan/branch/main/graph/badge.svg?token=AGqQgVDcL1)](https://codecov.io/gh/nao1215/morrigan)
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
 # morrigan - [WIP] Penetration Tool Set
