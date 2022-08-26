@@ -6,6 +6,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/cheggaaa/pb/v3"
+	"github.com/nao1215/morrigan/gocrypt"
+	"github.com/nao1215/morrigan/internal/embedded"
 	"github.com/nao1215/morrigan/internal/print"
 	"github.com/nao1215/morrigan/internal/system"
 	"github.com/spf13/cobra"
@@ -78,9 +81,11 @@ func crack(username string) error {
 			break
 		}
 
-		if err := compareChecksums(fields[1]); err != nil {
+		password, err := compareChecksums(fields[1])
+		if err != nil {
 			return err
 		}
+		print.Info(username + "'s password is " + password)
 		break
 	}
 	return nil
@@ -96,16 +101,30 @@ func existUser(unshadowList []string, username string) bool {
 	return false
 }
 
-func compareChecksums(encryptedPasswd string) error {
-	if strings.HasPrefix(encryptedPasswd, "$1$") {
-		print.Info("[WIP] md5sum. not implement")
-		return nil
-	} else if strings.HasPrefix(encryptedPasswd, "$5$") {
-		print.Info("[WIP] sha256sum.  not implement")
-		return nil
-	} else if strings.HasPrefix(encryptedPasswd, "$6$") {
-		print.Info("[WIP] sha256sum.  not implement")
-		return nil
+func compareChecksums(encryptedPasswdWithSaltAndID string) (string, error) {
+	lastIndex := strings.LastIndex(encryptedPasswdWithSaltAndID, "$")
+	saltWithID := encryptedPasswdWithSaltAndID[:lastIndex]
+
+	list, err := embedded.WeakPasswdList()
+	if err != nil {
+		return "", err
 	}
-	return errors.New("encrypted password=" + encryptedPasswd + " is unknown checksum format")
+
+	bar := pb.StartNew(len(list))
+	for _, v := range list {
+		hash, err := gocrypt.Crypt(v, saltWithID)
+		if err != nil {
+			bar.Finish()
+			return "", fmt.Errorf("%s%s: %w", "can not generate hash from password=", v, err)
+		}
+
+		if hash == encryptedPasswdWithSaltAndID {
+			bar.Finish()
+			return v, nil
+		}
+		bar.Increment()
+	}
+
+	bar.Finish()
+	return "", errors.New("can not carck password")
 }
