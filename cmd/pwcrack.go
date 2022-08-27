@@ -1,3 +1,4 @@
+// Package cmd manages the entry points for the subcommands that morrigan has.
 package cmd
 
 import (

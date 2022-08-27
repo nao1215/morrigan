@@ -1,3 +1,6 @@
+// Package unshadow is designed to analyze password management systems for
+// UNIX-like operating systems. This package provides the function to combine
+// /etc/passwd and /etc/shadow. Otherwise, it accepts password input while hiding user input.
 package unshadow
 
 import (
@@ -11,6 +14,7 @@ import (
 
 	"github.com/nao1215/morrigan/internal/gocrypt"
 	"github.com/nao1215/morrigan/internal/print"
+
 	"golang.org/x/term"
 )
 
