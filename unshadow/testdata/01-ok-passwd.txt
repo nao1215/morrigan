@@ -1,0 +1,2 @@
+morrie:x:1002:1002::/home/morrie:/bin/sh
+testuser:x:1003:1003:,,,:/home/testuser:/bin/bash

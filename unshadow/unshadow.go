@@ -18,6 +18,14 @@ import (
 	"golang.org/x/term"
 )
 
+const (
+	// PasswdFilePath is absolute path of "/etc/passwd"
+	PasswdFilePath = "/etc/passwd"
+
+	// ShadowFilePath is absolute path of "/etc/shadow"
+	ShadowFilePath = "/etc/passwd"
+)
+
 // IsRootUser returns whether the executing user has root privileges.
 func IsRootUser() bool {
 	return os.Geteuid() == 0
@@ -33,7 +41,7 @@ func ReadPassword() (string, error) {
 	// Get terminal state before password input
 	currentState, err := term.GetState(int(syscall.Stdin))
 	if err != nil {
-		return "", fmt.Errorf("%s: %w", "can not restore terminal state", err)
+		return "", fmt.Errorf("%s: %w", "can not get terminal state", err)
 	}
 
 	go func() {
@@ -55,7 +63,8 @@ func ReadPassword() (string, error) {
 }
 
 // Crypt provides a wrapper around the glibc crypt_r() function.
-// For the meaning of the arguments, refer to the package README.
+// Generates a hash from the password string and salt passed as arguments.
+// arg1=password (e.g. P@ssw0rd), arg2=salt with id (e.g. $y$j9T$EK7BPw2KNXh5fakmSslBN0$)
 func Crypt(passwd, salt string) (string, error) {
 	hash, err := gocrypt.Crypt(passwd, salt)
 	if err != nil {
@@ -64,31 +73,19 @@ func Crypt(passwd, salt string) (string, error) {
 	return hash, nil
 }
 
-// ReadEtcPasswdFile return contents of /etc/passwd
-func ReadEtcPasswdFile() ([]string, error) {
-	bytes, err := os.ReadFile("/etc/passwd")
-	if err != nil {
-		return nil, err
-	}
-	return strings.Split(string(bytes), "\n"), nil
-}
-
-// ReadEtcShadowFile return contents of /etc/shadow
-func ReadEtcShadowFile() ([]string, error) {
-	if !IsRootUser() {
-		return nil, errors.New("root privileges are required to read /etc/shadow")
-	}
-
-	bytes, err := os.ReadFile("/etc/shadow")
-	if err != nil {
-		return nil, err
-	}
-	return strings.Split(string(bytes), "\n"), nil
-}
-
 // Unshadow replaces the second field (password) in /etc/passwd with
 // the second field (encrypted password) in /etc/shadow.
-func Unshadow(passwdList, shadowList []string) ([]string, error) {
+func Unshadow(passwdFilePath, shadowFilePath string) ([]string, error) {
+	passwdList, err := readEtcPasswdFile(passwdFilePath)
+	if err != nil {
+		return nil, err
+	}
+
+	shadowList, err := readEtcShadowFile(shadowFilePath)
+	if err != nil {
+		return nil, err
+	}
+
 	if len(passwdList) != len(shadowList) {
 		return nil, errors.New("/etc/passwd and /etc/shadow have different line numbers")
 	}
@@ -120,6 +117,22 @@ func Unshadow(passwdList, shadowList []string) ([]string, error) {
 		unshadowList = append(unshadowList, unshadow)
 	}
 	return unshadowList, nil
+}
+
+func readEtcPasswdFile(passwdFilePath string) ([]string, error) {
+	passwdBytes, err := os.ReadFile(passwdFilePath)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", "can not read password file", err)
+	}
+	return strings.Split(string(passwdBytes), "\n"), nil
+}
+
+func readEtcShadowFile(etcShadowFilePath string) ([]string, error) {
+	bytes, err := os.ReadFile(etcShadowFilePath)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", "can not read shadow file", err)
+	}
+	return strings.Split(string(bytes), "\n"), nil
 }
 
 func validEtcPasswd(passwdList []string) bool {

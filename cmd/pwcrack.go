@@ -45,17 +45,7 @@ func pwcrack(cmd *cobra.Command, args []string) error {
 }
 
 func crack(username string) error {
-	passwdList, err := unshadow.ReadEtcPasswdFile()
-	if err != nil {
-		return err
-	}
-
-	shadowList, err := unshadow.ReadEtcShadowFile()
-	if err != nil {
-		return err
-	}
-
-	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(unshadow.PasswdFilePath, unshadow.ShadowFilePath)
 	if err != nil {
 		return fmt.Errorf("%s: %w", "can not generate unshadow from /etc/passwd and /etc/shadow", err)
 	}

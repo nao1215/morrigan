@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/nao1215/morrigan/internal/print"
 	"github.com/nao1215/morrigan/unshadow"
@@ -47,17 +46,7 @@ func unshadowRun(cmd *cobra.Command, args []string) error {
 }
 
 func unshadowLocalFiles() error {
-	passwdList, err := unshadow.ReadEtcPasswdFile()
-	if err != nil {
-		return err
-	}
-
-	shadowList, err := unshadow.ReadEtcShadowFile()
-	if err != nil {
-		return err
-	}
-
-	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(unshadow.PasswdFilePath, unshadow.ShadowFilePath)
 	if err != nil {
 		return err
 	}
@@ -69,19 +58,7 @@ func unshadowLocalFiles() error {
 }
 
 func unshadowUserSpecifiedFiles(passwdFile, shadowFile string) error {
-	passwdBytes, err := os.ReadFile(passwdFile)
-	if err != nil {
-		return fmt.Errorf("%s: %w", "can not read password file", err)
-	}
-	passwdList := strings.Split(string(passwdBytes), "\n")
-
-	shadowBytes, err := os.ReadFile(shadowFile)
-	if err != nil {
-		return fmt.Errorf("%s: %w", "can not read shadow file", err)
-	}
-	shadowList := strings.Split(string(shadowBytes), "\n")
-
-	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(passwdFile, shadowFile)
 	if err != nil {
 		return err
 	}
