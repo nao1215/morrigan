@@ -12,7 +12,7 @@ import (
 
 var unshadowCmd = &cobra.Command{
 	Use:   "unshadow ETC_PASSWD_FILE ETC_SHADOW_FILE",
-	Short: "combine password fields in /etc/passwd and /etc/shadow",
+	Short: "Combine password fields in /etc/passwd and /etc/shadow",
 	Long: `unshadow subcommand combine password fields in /etc/passwd and /etc/shadow.
 
 unshadow replaces the encrypted password written in the second field

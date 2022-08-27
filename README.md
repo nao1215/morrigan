@@ -33,6 +33,7 @@ Each subcommand is explained on other pages.
 |[pwcrack](./docs/pwcrack.md)| crack local user password|
 |[pwscore](./docs/pwscore.md)| [WIP] check password strength|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
+|[zip-pwcrack]|crack zip password|
 
 # Contributing
 First off, thanks for taking the time to contribute! ❤️  See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.

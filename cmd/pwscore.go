@@ -15,7 +15,7 @@ import (
 
 var passwdScoreCmd = &cobra.Command{
 	Use:   "pwscore USERNAME",
-	Short: "check password strength",
+	Short: "Check password strength",
 	Long: `pwscore subcommand checks password strength.
 
 pwscore checks the guessability of password using the dictionary.
