@@ -22,7 +22,7 @@ func Info(msg string) {
 
 // Warn print warning message at STDERR.
 func Warn(err interface{}) {
-	fmt.Fprintf(Stderr, ":%s: %v\n", color.YellowString("WARN "), err)
+	fmt.Fprintf(Stderr, "%s: %v\n", color.YellowString("WARN "), err)
 }
 
 // Err print error message at STDERR.
