@@ -8,8 +8,8 @@ import (
 	"unicode"
 
 	"github.com/nao1215/morrigan/internal/embedded"
-	"github.com/nao1215/morrigan/internal/interactive"
 	"github.com/nao1215/morrigan/internal/print"
+	"github.com/nao1215/morrigan/unshadow"
 	"github.com/spf13/cobra"
 )
 
@@ -38,7 +38,7 @@ func pwscore(cmd *cobra.Command, args []string) error {
 		return errors.New("pwscore subcommand need one argument (=username)")
 	}
 
-	passwd, err := interactive.ReadPassword()
+	passwd, err := unshadow.ReadPassword()
 	if err != nil {
 		return err
 	}

@@ -1,3 +1,5 @@
+// Package embedded provides functions to read and manipulate
+// files embedded in the morrigan command.
 package embedded
 
 import (
