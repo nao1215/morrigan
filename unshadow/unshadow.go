@@ -1,21 +1,63 @@
-package system
+package unshadow
 
 import (
 	"errors"
+	"fmt"
 	"os"
-	"runtime"
+	"os/signal"
 	"sort"
 	"strings"
-)
+	"syscall"
 
-// IsWindows returns whether the execution environment is Windows or not.
-func IsWindows() bool {
-	return runtime.GOOS == "windows"
-}
+	"github.com/nao1215/morrigan/internal/gocrypt"
+	"github.com/nao1215/morrigan/internal/print"
+	"golang.org/x/term"
+)
 
 // IsRootUser returns whether the executing user has root privileges.
 func IsRootUser() bool {
 	return os.Geteuid() == 0
+}
+
+// ReadPassword get password from terminal (stdin).
+func ReadPassword() (string, error) {
+	// Get Ctrl-C (Interrupt) signal
+	signalChan := make(chan os.Signal, 1)
+	signal.Notify(signalChan, os.Interrupt)
+	defer signal.Stop(signalChan)
+
+	// Get terminal state before password input
+	currentState, err := term.GetState(int(syscall.Stdin))
+	if err != nil {
+		return "", fmt.Errorf("%s: %w", "can not restore terminal state", err)
+	}
+
+	go func() {
+		<-signalChan
+		if err := term.Restore(int(syscall.Stdin), currentState); err != nil {
+			print.Fatal(fmt.Errorf("%s: %w", "can not restore terminal state", err))
+		}
+		os.Exit(1)
+	}()
+
+	fmt.Printf("Enter password: ")
+	passwd, err := term.ReadPassword(syscall.Stdin)
+	fmt.Println("")
+	if err != nil {
+		return "", fmt.Errorf("%s: %w", "can not read password from stdin", err)
+	}
+
+	return string(passwd), nil
+}
+
+// Crypt provides a wrapper around the glibc crypt_r() function.
+// For the meaning of the arguments, refer to the package README.
+func Crypt(passwd, salt string) (string, error) {
+	hash, err := gocrypt.Crypt(passwd, salt)
+	if err != nil {
+		return "", fmt.Errorf("%s%s: %w", "can not generate hash from password=", passwd, err)
+	}
+	return hash, nil
 }
 
 // ReadEtcPasswdFile return contents of /etc/passwd

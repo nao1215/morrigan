@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/nao1215/morrigan/internal/print"
-	"github.com/nao1215/morrigan/internal/system"
+	"github.com/nao1215/morrigan/unshadow"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ the local system files.
 	Example: `  sudo morrigan unshadow
   sudo morrigan unshadow ETC_PASSWD_FILE ETC_SHADOW_FILE`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := unshadow(cmd, args); err != nil {
+		if err := unshadowRun(cmd, args); err != nil {
 			print.Err(err)
 			os.Exit(1)
 		}
@@ -35,7 +35,7 @@ func init() {
 	rootCmd.AddCommand(unshadowCmd)
 }
 
-func unshadow(cmd *cobra.Command, args []string) error {
+func unshadowRun(cmd *cobra.Command, args []string) error {
 	if len(args) == 1 || len(args) > 2 {
 		return errors.New("incorrect argument specified. see help, $ morrigan unshadow --help")
 	}
@@ -47,17 +47,17 @@ func unshadow(cmd *cobra.Command, args []string) error {
 }
 
 func unshadowLocalFiles() error {
-	passwdList, err := system.ReadEtcPasswdFile()
+	passwdList, err := unshadow.ReadEtcPasswdFile()
 	if err != nil {
 		return err
 	}
 
-	shadowList, err := system.ReadEtcShadowFile()
+	shadowList, err := unshadow.ReadEtcShadowFile()
 	if err != nil {
 		return err
 	}
 
-	unshadowList, err := system.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
 	if err != nil {
 		return err
 	}
@@ -81,7 +81,7 @@ func unshadowUserSpecifiedFiles(passwdFile, shadowFile string) error {
 	}
 	shadowList := strings.Split(string(shadowBytes), "\n")
 
-	unshadowList, err := system.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
 	if err != nil {
 		return err
 	}

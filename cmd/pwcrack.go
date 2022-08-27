@@ -7,10 +7,9 @@ import (
 	"strings"
 
 	"github.com/cheggaaa/pb/v3"
-	"github.com/nao1215/morrigan/gocrypt"
 	"github.com/nao1215/morrigan/internal/embedded"
 	"github.com/nao1215/morrigan/internal/print"
-	"github.com/nao1215/morrigan/internal/system"
+	"github.com/nao1215/morrigan/unshadow"
 	"github.com/spf13/cobra"
 )
 
@@ -45,17 +44,17 @@ func pwcrack(cmd *cobra.Command, args []string) error {
 }
 
 func crack(username string) error {
-	passwdList, err := system.ReadEtcPasswdFile()
+	passwdList, err := unshadow.ReadEtcPasswdFile()
 	if err != nil {
 		return err
 	}
 
-	shadowList, err := system.ReadEtcShadowFile()
+	shadowList, err := unshadow.ReadEtcShadowFile()
 	if err != nil {
 		return err
 	}
 
-	unshadowList, err := system.Unshadow(passwdList, shadowList)
+	unshadowList, err := unshadow.Unshadow(passwdList, shadowList)
 	if err != nil {
 		return fmt.Errorf("%s: %w", "can not generate unshadow from /etc/passwd and /etc/shadow", err)
 	}
@@ -112,10 +111,10 @@ func compareChecksums(encryptedPasswdWithSaltAndID string) (string, error) {
 
 	bar := pb.StartNew(len(list))
 	for _, v := range list {
-		hash, err := gocrypt.Crypt(v, saltWithID)
+		hash, err := unshadow.Crypt(v, saltWithID)
 		if err != nil {
 			bar.Finish()
-			return "", fmt.Errorf("%s%s: %w", "can not generate hash from password=", v, err)
+			return "", err
 		}
 
 		if hash == encryptedPasswdWithSaltAndID {

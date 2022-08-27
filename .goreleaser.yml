@@ -8,7 +8,7 @@ before:
 builds:
   - main: .
     ldflags:
-      - -s -w -X morrigan/internal/cmdinfo.Version=v{{ .Version }}
+      - -s -w -X morrigan/cmd.Version=v{{ .Version }}
     env:
       - CGO_ENABLED=1
     goos:
