@@ -30,7 +30,7 @@ Each subcommand is explained on other pages.
 |sub-command | description |
 |:--|:--|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|
-|pwscore| [WIP] check password strength|
+|[pwscore](./docs/pwscore.md)| [WIP] check password strength|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
 
 # Contributing
