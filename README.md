@@ -29,7 +29,7 @@ $ go install github.com/nao1215/morrigan@latest
 Each subcommand is explained on other pages.
 |sub-command | description |
 |:--|:--|
-|pwcrack| crack local user password|
+|[pwcrack](./docs/pwcrack.md)| crack local user password|
 |pwscore| [WIP] check password strength|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
 
