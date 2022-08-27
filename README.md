@@ -26,11 +26,12 @@ $ go install github.com/nao1215/morrigan@latest
 
 
 # morrigan sub-command list
+Each subcommand is explained on other pages.
 |sub-command | description |
 |:--|:--|
-|pwcrack| crack local user password|
-|pwscore| [WIP] check password strength|
-|unshadow| combine password fields in /etc/passwd and /etc/shadow|
+|[pwcrack](./docs/pwcrack.md)| crack local user password|
+|[pwscore](./docs/pwscore.md)| [WIP] check password strength|
+|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
 
 # Contributing
 First off, thanks for taking the time to contribute! ❤️  See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
