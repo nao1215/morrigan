@@ -39,7 +39,7 @@ import (
 
 var netcatCmd = &cobra.Command{
 	Use:   "netcat [hostname] [port]",
-	Short: "arbitrary TCP and UDP connections and listens",
+	Short: "Arbitrary TCP and UDP connections and listens",
 	Long: `netcat subcommand allows to listen TCP/UDP ports and send data to remote ports over TCP/UDP.
 `,
 	Example: `  netcat hostname 12`,
