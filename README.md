@@ -29,7 +29,7 @@ $ go install github.com/nao1215/morrigan@latest
 Each subcommand is explained on other pages.
 |sub-command | description |
 |:--|:--|
-|netcat| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
+|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|
 |[pwscore](./docs/pwscore.md)| [WIP] check password strength|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
