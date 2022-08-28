@@ -3,8 +3,18 @@
 [![codecov](https://codecov.io/gh/nao1215/morrigan/branch/main/graph/badge.svg?token=AGqQgVDcL1)](https://codecov.io/gh/nao1215/morrigan)
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
-# morrigan - [WIP] Penetration Tool Set
+# morrigan - Penetration Tool Set
 morrigan command is a tool-set to verify the vulnerability of services developed by you. It is not a tool to attack services on the network. As part of the developer's (it's me) study of security, I will be adding subcommands regarding penetration.  
+  
+### **morrigan sub-command list**
+Each subcommand is explained on other pages.
+|sub-command | description |
+|:--|:--|
+|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
+|[pwcrack](./docs/pwcrack.md)| crack local user password|
+|[pwscore](./docs/pwscore.md)| [WIP] check password strength|
+|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
+|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|  
   
 ### **Legal Warning**
 > With great power comes great responsibility.
@@ -25,22 +35,10 @@ $ go install github.com/nao1215/morrigan@latest
 [The release page](https://github.com/nao1215/morrigan/releases) contains packages in .deb, .rpm, and .apk formats.
 
 
-# morrigan sub-command list
-Each subcommand is explained on other pages.
-|sub-command | description |
-|:--|:--|
-|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
-|[pwcrack](./docs/pwcrack.md)| crack local user password|
-|[pwscore](./docs/pwscore.md)| [WIP] check password strength|
-|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
-|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|
-
 # Contributing
 First off, thanks for taking the time to contribute! ❤️  See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 Contributions are not only related to development. For example, GitHub Star motivates me to develop!!  
 [![Star History Chart](https://api.star-history.com/svg?repos=nao1215/morrigan&type=Date)](https://star-history.com/#nao1215/morrigan&Date)
-
-
 
 # Contact
 If you would like to send comments such as "find a bug" or "request for additional features" to the developer, please use one of the following contacts.
