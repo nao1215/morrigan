@@ -27,7 +27,7 @@ func ExampleWriter() {
 	}{
 		{"readme.txt", "This archive contains some text files."},
 		{"gopher.txt", "Gopher names:\nGeorge\nGeoffrey\nGonzo"},
-		{"todo.txt", "Get animal handling licence.\nWrite more examples."},
+		{"todo.txt", "Get animal handling license.\nWrite more examples."},
 	}
 	for _, file := range files {
 		f, err := w.Create(file.Name)
