@@ -1,4 +1,6 @@
 // Package cmd manages the entry points for the subcommands that morrigan has.
+package cmd
+
 // This package is forked from https://github.com/vfedoroff/go-netcat (MIT LICENSE)
 //
 // The MIT License (MIT)
@@ -22,7 +24,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-package cmd
 
 import (
 	"errors"
@@ -69,7 +70,7 @@ type netcatFlag struct {
 }
 
 func netcat(cmd *cobra.Command, args []string) error {
-	flag, err := parseArgs(cmd, args)
+	flag, err := parseNetCatArgs(cmd, args)
 	if err != nil {
 		return err
 	}
@@ -139,7 +140,7 @@ func udpHandler(flag *netcatFlag) error {
 	return nil
 }
 
-func parseArgs(cmd *cobra.Command, args []string) (*netcatFlag, error) {
+func parseNetCatArgs(cmd *cobra.Command, args []string) (*netcatFlag, error) {
 	flag := netcatFlag{}
 
 	isUDP, err := cmd.Flags().GetBool("udp")
