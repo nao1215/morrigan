@@ -7,7 +7,8 @@
 morrigan command is a tool-set to verify the vulnerability of services developed by you. It is not a tool to attack services on the network. As part of the developer's (it's me) study of security, I will be adding subcommands regarding penetration.  
   
 ### **morrigan sub-command list**
-Each subcommand is explained on other pages.
+Each subcommand is explained on other pages. We plan to add more subcommands. We will be reimplementing existing commands used in penetration in golang. However, we will also implement morrigan's own subcommands.
+  
 |sub-command | description |
 |:--|:--|
 |[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
