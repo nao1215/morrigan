@@ -12,7 +12,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/nao1215/morrigan/internal/gocrypt"
+	"github.com/nao1215/morrigan/gocrypt"
 	"github.com/nao1215/morrigan/internal/print"
 
 	"golang.org/x/term"
