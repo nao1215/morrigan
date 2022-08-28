@@ -195,7 +195,10 @@ func TestRLEBuffer(t *testing.T) {
 	var all []byte
 	writes := []string{"abcdeee", "eeeeeee", "eeeefghaaiii"}
 	for _, w := range writes {
-		b.Write([]byte(w))
+		n, err := b.Write([]byte(w))
+		if n != len(w) || err != nil {
+			t.Fatalf("failed to write: err=%v, write buffer length(expect=%d, got=%d)", err, n, len(w))
+		}
 		all = append(all, w...)
 	}
 	if len(b.buf) != 10 {
