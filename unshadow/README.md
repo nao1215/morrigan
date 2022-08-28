@@ -2,6 +2,7 @@
 unshadow package provide function that combine password fields in /etc/passwd and /etc/shadow. unshadow is known for its distribution of John The Ripper, a password cracking tool.
 
 # Example
+## code
 ```go
 import (
 	"fmt"
@@ -20,6 +21,41 @@ func main() {
 	}
 	return nil
 }
+```
+```sh
+_apt:*:105:65534::/nonexistent:/usr/sbin/nologin
+_flatpak:*:129:138:Flatpak system-wide installation helper,,,:/nonexistent:/usr/sbin/nologin
+avahi-autoipd:*:109:117:Avahi autoip daemon,,,:/var/lib/avahi-autoipd:/usr/sbin/nologin
+avahi:*:113:120:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+backup:*:34:34:backup:/var/backups:/usr/sbin/nologin
+bin:*:2:2:bin:/bin:/usr/sbin/nologin
+colord:*:121:127:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/nologin
+cups-pk-helper:*:114:121:user for cups-pk-helper service,,,:/home/cups-pk-helper:/usr/sbin/nologin
+daemon:*:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+dnsmasq:*:112:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+games:*:5:60:games:/usr/games:/usr/sbin/nologin
+gdm:*:126:131:Gnome Display Manager:/var/lib/gdm3:/bin/false
+geoclue:*:122:128::/var/lib/geoclue:/usr/sbin/nologin
+gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+gnome-initial-setup:*:125:65534::/run/gnome-initial-setup/:/bin/false
+gup:*:134:9:Group Update Program,,,:/var/lib/gup/:/usr/sbin/nologin
+hplip:*:124:7:HPLIP system user,,,:/run/hplip:/bin/false
+irc:*:39:39:ircd:/run/ircd:/usr/sbin/nologin
+kernoops:*:116:65534:Kernel Oops Tracking Daemon,,,:/:/usr/sbin/nologin
+lightdm:*:127:134:Light Display Manager:/var/lib/lightdm:/bin/false
+list:*:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+lp:*:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:*:8:8:mail:/var/mail:/usr/sbin/nologin
+man:*:6:12:man:/var/cache/man:/usr/sbin/nologin
+messagebus:*:103:106::/nonexistent:/usr/sbin/nologin
+mimixbox:!:1001:1001::/home/mimixbox:/bin/sh
+morrie:$y$j9T$AWBxIYtBpRyJuzyHhC/4M.$LpGFc4mc0F8/f9w150QMsvqku7hofX4r6YIFiUFiEj1:1002:1002::/home/morrie:/bin/sh
+mysql:!:132:144:MySQL Server,,,:/nonexistent:/bin/false
+news:*:9:9:news:/var/spool/news:/usr/sbin/nologin
+nm-openvpn:*:117:122:NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+nobody:*:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+ :
+ :
 ```
 
 
