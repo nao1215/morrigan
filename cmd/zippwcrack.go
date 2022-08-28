@@ -8,7 +8,9 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 
+	"github.com/briandowns/spinner"
 	"github.com/nao1215/morrigan/internal/print"
 	"github.com/spf13/cobra"
 	"github.com/yeka/zip"
@@ -47,26 +49,65 @@ func zipPwcrack(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	// TODO: use thread
+	// Before reading a ZIP file in goroutine,
+	// verify that the file is zip format or has a password.
+	noPasswd, err := isNoPassword(bytes.NewReader(b))
+	if err != nil {
+		return err
+	}
+	if noPasswd {
+		print.Info("zip file has no password")
+		return nil
+	}
+
+	type zipPasswordCrackResult struct {
+		password string
+	}
 	ch := make(chan string, 100)
+	resultCh := make(chan zipPasswordCrackResult, 100)
+
 	go genPassword(ch)
-	for pass := range ch {
-		fmt.Printf(".")
-		if err := readZipBuffer(pass, bytes.NewReader(b)); err == nil {
-			fmt.Println("")
-			print.Info("password is " + pass)
-			return nil
-		} else if errors.Is(err, errNoPassword) {
-			fmt.Println("")
-			print.Info(err.Error())
+	for i := 0; i < 10; i++ {
+		go func(result chan<- zipPasswordCrackResult) {
+			for pass := range ch {
+				if err := readZipBuffer(pass, bytes.NewReader(b)); err == nil {
+					result <- zipPasswordCrackResult{
+						password: pass,
+					}
+					return
+				}
+				result <- zipPasswordCrackResult{}
+			}
+		}(resultCh)
+	}
+
+	print.Info("detect passwords by brute force...")
+	s := spinner.New(spinner.CharSets[14], 100*time.Millisecond) // Build our new spinner
+	s.Start()
+	for r := range resultCh {
+		if r.password != "" {
+			s.Stop()
+			print.Info("zip file's password = " + r.password)
 			return nil
 		}
 	}
-	fmt.Println("")
+	s.Stop()
 	return errors.New("can not find password")
 }
 
-var errNoPassword = errors.New("this zip file has no password")
+func isNoPassword(buf *bytes.Reader) (bool, error) {
+	zipr, err := zip.NewReader(buf, int64(buf.Len()))
+	if err != nil {
+		return false, err
+	}
+
+	for _, z := range zipr.File {
+		if !z.IsEncrypted() {
+			return true, nil
+		}
+	}
+	return false, nil
+}
 
 func readZipBuffer(password string, buf *bytes.Reader) (err error) {
 	defer func() {
@@ -81,11 +122,7 @@ func readZipBuffer(password string, buf *bytes.Reader) (err error) {
 	}
 
 	for _, z := range zipr.File {
-		if z.IsEncrypted() {
-			z.SetPassword(password)
-		} else {
-			return errNoPassword
-		}
+		z.SetPassword(password)
 
 		rc, err := z.Open()
 		if err != nil {
@@ -100,7 +137,7 @@ func readZipBuffer(password string, buf *bytes.Reader) (err error) {
 }
 
 func genPassword(chpass chan<- string) {
-	chars := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*+!$%&^~-=|"
+	chars := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*+!$%&^~-=|@*[{]}+;:?_"
 	count := int64(0)
 	idx := make([]int, 1, 36)
 	for {
