@@ -192,7 +192,10 @@ func BenchmarkCompressedZipGarbage(b *testing.B) {
 				Name:   "foo",
 				Method: Deflate,
 			})
-			w.Write(bigBuf)
+			n, err := w.Write(bigBuf)
+			if n != len(bigBuf) || err != nil {
+				b.Errorf("failed to write big buffer")
+			}
 		}
 		zw.Close()
 	}
