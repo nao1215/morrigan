@@ -237,7 +237,12 @@ func TestZipCrypto(t *testing.T) {
 	zipr.File[0].SetPassword("golang")
 	r, _ := zipr.File[0].Open()
 	res := new(bytes.Buffer)
-	io.Copy(res, r)
+
+	n, err = io.Copy(res, r)
+	if err != nil || n != int64(conLen) {
+		t.Errorf("Expected to read the full contents.")
+	}
+
 	r.Close()
 
 	if !bytes.Equal(contents, res.Bytes()) {
