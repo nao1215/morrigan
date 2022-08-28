@@ -223,7 +223,10 @@ func (p *Ping) ping1(net6 bool, host string, i uint64, waitFor time.Duration, pa
 	}
 
 	// Send ICMP Echo Request
-	c.SetDeadline(time.Now().Add(waitFor))
+	if err := c.SetDeadline(time.Now().Add(waitFor)); err != nil {
+		return "", err
+	}
+
 	msg := make([]byte, packetDataSize)
 	if net6 {
 		msg[0] = icmp6TypeEchoRequest
@@ -239,7 +242,9 @@ func (p *Ping) ping1(net6 bool, host string, i uint64, waitFor time.Duration, pa
 	}
 
 	// Get ICMP Echo Reply
-	c.SetDeadline(time.Now().Add(waitFor))
+	if err := c.SetDeadline(time.Now().Add(waitFor)); err != nil {
+		return "", err
+	}
 	rmsg := make([]byte, packetDataSize+256)
 	before := time.Now()
 	amt, err := c.Read(rmsg[:])
