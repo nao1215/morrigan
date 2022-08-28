@@ -70,7 +70,9 @@ func ZipCryptoDecryptor(r *io.SectionReader, password []byte) (*io.SectionReader
 	z := NewZipCrypto(password)
 	b := make([]byte, r.Size())
 
-	r.Read(b)
+	if _, err := r.Read(b); err != nil {
+		return nil, err
+	}
 
 	m := z.Decrypt(b)
 	return io.NewSectionReader(bytes.NewReader(m), 12, int64(len(m))), nil
