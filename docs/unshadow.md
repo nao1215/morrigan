@@ -86,4 +86,4 @@ The "/etc/shadow" file contains the encrypted password and information related t
 |8|account validity period|The number of days (expressed as the number of days elapsed since January 1, 1970) before the account becomes unavailable|
 |9|reserved Field| not used|
   
-Passwords are encrypted using md5, sha256, sha512, etc. The encryption (hash calculation) is described in [gocrypt](./gocrypt.md).
+Passwords are encrypted using md5, sha256, sha512, etc. The encryption (hash calculation) is described in [gocrypt](../../../nao1215/morrigan/gocrypt/README.md).

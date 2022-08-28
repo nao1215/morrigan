@@ -16,7 +16,7 @@ import (
 
 var passwdCrackCmd = &cobra.Command{
 	Use:   "pwcrack USERNAME",
-	Short: "crack local user password",
+	Short: "Crack local user password",
 	Long: `pwcrack subcommand crack local user password (need root privirage).
 
 pwcrack checks the guessability of passwords using a dictionary.

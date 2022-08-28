@@ -12,8 +12,8 @@ import (
 
 	"github.com/briandowns/spinner"
 	"github.com/nao1215/morrigan/internal/print"
+	"github.com/nao1215/morrigan/zip"
 	"github.com/spf13/cobra"
-	"github.com/yeka/zip"
 )
 
 var zipPasswordCrackCmd = &cobra.Command{
