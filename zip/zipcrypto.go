@@ -97,11 +97,12 @@ func (z *zipCryptoWriter) Write(p []byte) (n int, err error) {
 		header[11] = byte(crc >> 8)
 
 		z.z.init()
-		z.w.Write(z.z.Encrypt(header))
+		if _, err := z.w.Write(z.z.Encrypt(header)); err != nil {
+			return 0, err
+		}
 		n += 12
 	}
-	z.w.Write(z.z.Encrypt(p))
-	return
+	return z.w.Write(z.z.Encrypt(p))
 }
 
 func ZipCryptoEncryptor(i io.Writer, pass passwordFn, fw *fileWriter) (io.Writer, error) {
