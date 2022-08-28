@@ -9,13 +9,13 @@ morrigan command is a tool-set to verify the vulnerability of services developed
 ### **morrigan sub-command list**
 Each subcommand is explained on other pages. We plan to add more subcommands. We will be reimplementing existing commands used in penetration in golang. However, we will also implement morrigan's own subcommands.
   
-|sub-command | description |
-|:--|:--|
-|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|
-|[pwcrack](./docs/pwcrack.md)| crack local user password|
-|[pwscore](./docs/pwscore.md)| [WIP] check password strength|
-|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|
-|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|  
+|sub-command | description |orginal author or inspired by|
+|:--|:--|:--|
+|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|[Vadym Fedorov](https://github.com/vfedoroff) (forked from [go-netcat](https://github.com/vfedoroff/go-netcat))|
+|[pwcrack](./docs/pwcrack.md)| crack local user password|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
+|[pwscore](./docs/pwscore.md)| [WIP] check password strength|Naohiro CHIKAMATSU (inspired by [libpwquality](https://github.com/libpwquality/libpwquality))|
+|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
+|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|[ICHINOSE Shogo](https://github.com/shogo82148)|  
   
 ### **Legal Warning**
 > With great power comes great responsibility.
