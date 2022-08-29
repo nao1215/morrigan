@@ -4,7 +4,7 @@
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
 # morrigan - Penetration Tool Set
-morrigan command is a tool-set to verify the vulnerability of services developed by you. It is not a tool to attack services on the network. As part of the developer's (it's me) study of security, I will be adding subcommands regarding penetration.  
+morrigan command is a tool-set to verify the vulnerability of services developed by you. Like [busybox](https://busybox.net) in the embedded platform, morrigan provides multiple functions in a single binary to complete the task. morrigan is not a tool to attack services on the network. We will be adding subcommands regarding penetration as part of the developer's (it's me) study of security.  
   
 ### **morrigan sub-command list**
 Each subcommand is explained on other pages. We plan to add more subcommands. We will be reimplementing existing commands used in penetration in golang. However, we will also implement morrigan's own subcommands.
