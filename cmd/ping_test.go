@@ -67,6 +67,10 @@ func (M *myConn) Write(b []byte) (int, error) {
 	return 0, nil
 }
 
+func (M *myConn) SetDeadline(t time.Time) error {
+	return nil
+}
+
 // Test cksum
 func TestCkSum(t *testing.T) {
 	for _, tt := range []struct {
