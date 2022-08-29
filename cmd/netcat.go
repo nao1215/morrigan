@@ -43,7 +43,7 @@ var netcatCmd = &cobra.Command{
 	Short: "Arbitrary TCP and UDP connections and listens",
 	Long: `netcat subcommand allows to listen TCP/UDP ports and send data to remote ports over TCP/UDP.
 `,
-	Example: `  netcat hostname 12`,
+	Example: `  morrigan netcat hostname 12`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := netcat(cmd, args); err != nil {
 			print.Err(err)

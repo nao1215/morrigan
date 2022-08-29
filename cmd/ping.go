@@ -56,7 +56,7 @@ an ICMP ECHO_RESPONSE from a host or gateway. ECHO_REQUEST datagrams
 (“pings”) have an IP and ICMP header, followed by a struct timeval and
 then an arbitrary number of “pad” bytes used to fill out the packet.
 `,
-	Example: `  morrigan ping google.com`,
+	Example: `  sudo morrigan ping google.com`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := pingRun(cmd, args); err != nil {
 			print.Err(err)
