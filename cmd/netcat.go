@@ -1,7 +1,7 @@
 // Package cmd manages the entry points for the subcommands that morrigan has.
 package cmd
 
-// This package is forked from https://github.com/vfedoroff/go-netcat (MIT LICENSE)
+// netcat subcommand is forked from https://github.com/vfedoroff/go-netcat
 //
 // The MIT License (MIT)
 //

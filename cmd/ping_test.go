@@ -1,6 +1,6 @@
 package cmd
 
-// This package is forked from https://github.com/u-root/u-root/blob/main/cmds/core/ping/ping.go
+// ping subcommand is forked from https://github.com/u-root/u-root/blob/main/cmds/core/ping/ping.go
 // (BSD 3-Clause "New" or "Revised" License)
 //
 // BSD 3-Clause License
