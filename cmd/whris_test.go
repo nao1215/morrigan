@@ -49,11 +49,7 @@ mnt-by:         MNT-EDGECAST
 
 func TestResolve(t *testing.T) {
 	type fields struct {
-		targetDomain        string
-		targetIP            string
-		whoisResponseServer string
-		whoisResponse       string
-		parseResult         []networkAdmin
+		parseResult []networkAdmin
 	}
 	type args struct {
 		domain  string
@@ -74,7 +70,6 @@ func TestResolve(t *testing.T) {
 				parseResult: []networkAdmin{
 					{
 						ipRange: "93.0.0.0 - 93.255.255.255",
-						admin:   "RIPE NCC",
 					},
 					{
 						ipRange: "93.184.216.0 - 93.184.216.255",
