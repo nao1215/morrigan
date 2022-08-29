@@ -10,7 +10,7 @@ const TestRipeWhoisResponse = `% IANA WHOIS server
 % This query returned 1 object
 refer:        whois.ripe.net
 inetnum:      93.0.0.0 - 93.255.255.255
-organisation: RIPE NCC
+organization: RIPE NCC
 status:       ALLOCATED
 whois:        whois.ripe.net
 changed:      2007-03

@@ -138,7 +138,7 @@ func (s *domainSummary) ParseWhoisResponse() {
 				tmp.netName = strings.TrimSpace(col[1])
 			case "country", "Country":
 				tmp.country = strings.TrimSpace(col[1])
-			case "descr", "Organization", "organisation", "owner":
+			case "descr", "Organization", "organization", "owner":
 				if tmp.admin == "" {
 					tmp.admin = strings.TrimSpace(col[1])
 				}
