@@ -1,6 +1,6 @@
-// Package cmd manages the entry points for the subcommands that morrigan has.
-// Original author is ICHINOSE Shogo (https://github.com/shogo82148)
 package cmd
+
+// Original author is ICHINOSE Shogo (https://github.com/shogo82148)
 
 import (
 	"bytes"

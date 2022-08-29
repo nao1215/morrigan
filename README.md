@@ -4,19 +4,20 @@
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
 # morrigan - Penetration Tool Set
-morrigan command is a tool-set to verify the vulnerability of services developed by you. It is not a tool to attack services on the network. As part of the developer's (it's me) study of security, I will be adding subcommands regarding penetration.  
+morrigan command is a tool-set to verify the vulnerability of services developed by you. Like [busybox](https://busybox.net) in the embedded platform, morrigan provides multiple functions in a single binary to complete the task. morrigan is not a tool to attack services on the network. We will be adding subcommands regarding penetration as part of the developer's (it's me) study of security.  
   
 ### **morrigan sub-command list**
 Each subcommand is explained on other pages. We plan to add more subcommands. We will be reimplementing existing commands used in penetration in golang. However, we will also implement morrigan's own subcommands.
   
-|sub-command | description |orginal author or inspired by|
+|sub-command | description |forked from or inspired by|
 |:--|:--|:--|
-|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|[Vadym Fedorov](https://github.com/vfedoroff) (forked from [go-netcat](https://github.com/vfedoroff/go-netcat))|
+|[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|forked from [go-netcat](https://github.com/vfedoroff/go-netcat)|
 |[ping](./docs/ping.md)|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
-|[pwscore](./docs/pwscore.md)| [WIP] check password strength|Naohiro CHIKAMATSU (inspired by [libpwquality](https://github.com/libpwquality/libpwquality))|
-|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
-|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|[ICHINOSE Shogo](https://github.com/shogo82148)|  
+|[pwscore](./docs/pwscore.md)| [WIP] check password strength|inspired by [libpwquality](https://github.com/libpwquality/libpwquality)|
+|[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|inspired by [John the ripper](https://www.openwall.com/john/)|
+|[whris](./docs/whris.md)|Displays management information for IPs associated with the domain|forked from [whris](https://github.com/harakeishi/whris)|
+|[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|inspired by [ICHINOSE Shogo](https://github.com/shogo82148)|  
   
 ### **Legal Warning**
 > With great power comes great responsibility.
