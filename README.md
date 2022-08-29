@@ -12,7 +12,7 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
 |sub-command | description |orginal author or inspired by|
 |:--|:--|:--|
 |[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|[Vadym Fedorov](https://github.com/vfedoroff) (forked from [go-netcat](https://github.com/vfedoroff/go-netcat))|
-|ping|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
+|[ping](./docs/ping.md)|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
 |[pwscore](./docs/pwscore.md)| [WIP] check password strength|Naohiro CHIKAMATSU (inspired by [libpwquality](https://github.com/libpwquality/libpwquality))|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
