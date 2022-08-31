@@ -19,6 +19,11 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
 |[whris](./docs/whris.md)|Displays management information for IPs associated with the domain|forked from [whris](https://github.com/harakeishi/whris)|
 |[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|inspired by [ICHINOSE Shogo](https://github.com/shogo82148)|  
   
+The subcommands we plan to add to morrigan are as follows:
+- log-collect: Copy the logs on the system to any directory.
+- shbin: Obfuscate shell scripts.
+- nmap: Network exploration tool and security / port scanner
+  
 ### **Legal Warning**
 > With great power comes great responsibility.
 
