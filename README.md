@@ -3,6 +3,10 @@
 [![codecov](https://codecov.io/gh/nao1215/morrigan/branch/main/graph/badge.svg?token=AGqQgVDcL1)](https://codecov.io/gh/nao1215/morrigan)
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
+<div align="center">
+<img src="docs/img/morrigan_logo.jpg" width="15%">
+</div>
+
 # morrigan - Penetration Tool Set
 morrigan command is a tool-set to verify the vulnerability of services developed by you. Like [busybox](https://busybox.net) in the embedded platform, morrigan provides multiple functions in a single binary to complete the task. morrigan is not a tool to attack services on the network. We will be adding subcommands regarding penetration as part of the developer's (it's me) study of security.  
   
