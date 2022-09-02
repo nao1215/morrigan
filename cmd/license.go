@@ -68,7 +68,7 @@ func licenseRun(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func printPkgList() error {
+func printPkgList() {
 	l := []license{
 		{
 			pkg:       "gocrypt",
@@ -114,7 +114,7 @@ func printPkgList() error {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Package (CMD)", "Orginal Author", "Orginal URL", "LICENSE"})
+	table.SetHeader([]string{"Package (CMD)", "Original Author", "Original URL", "LICENSE"})
 	table.SetAutoWrapText(false)
 
 	for _, v := range tableData {
