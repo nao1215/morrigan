@@ -15,8 +15,8 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
   
 |sub-command | description |forked from or inspired by|
 |:--|:--|:--|
-|license||-|
-|log-collect|Print the license of the package (or subcommand) used in the morrigan| - |
+|license|Print the license of the package (or subcommand) used in the morrigan|-|
+|log-collect|Collect the logs that exist in the system| - |
 |[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|forked from [go-netcat](https://github.com/vfedoroff/go-netcat)|
 |[ping](./docs/ping.md)|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|inspired by [John the ripper](https://www.openwall.com/john/)|
