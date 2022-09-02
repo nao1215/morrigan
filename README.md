@@ -15,6 +15,7 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
   
 |sub-command | description |forked from or inspired by|
 |:--|:--|:--|
+|log-collect|Collect the logs that exist in the system| - |
 |[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|forked from [go-netcat](https://github.com/vfedoroff/go-netcat)|
 |[ping](./docs/ping.md)|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
 |[pwcrack](./docs/pwcrack.md)| crack local user password|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
@@ -24,7 +25,6 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
 |[zip-pwcrack](./docs/zip-pwcrack.md)|crack zip password|inspired by [ICHINOSE Shogo](https://github.com/shogo82148)|  
   
 The subcommands we plan to add to morrigan are as follows:
-- log-collect: Copy the logs on the system to any directory.
 - shbin: Obfuscate shell scripts.
 - nmap: Network exploration tool and security / port scanner
   

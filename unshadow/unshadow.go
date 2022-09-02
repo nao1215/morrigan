@@ -136,15 +136,9 @@ func readEtcShadowFile(etcShadowFilePath string) ([]string, error) {
 }
 
 func validEtcPasswd(passwdList []string) bool {
-	if len(passwdList) == 0 {
-		return false
-	}
 	return len(strings.Split(passwdList[0], ":")) == 7
 }
 
 func validEtcShadow(shadowList []string) bool {
-	if len(shadowList) == 0 {
-		return false
-	}
 	return len(strings.Split(shadowList[0], ":")) == 9
 }

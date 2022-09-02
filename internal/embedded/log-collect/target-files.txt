@@ -1,0 +1,4 @@
+/var/log/auth.log
+/var/log/kern.log
+/var/log/messages
+/var/log/syslog
