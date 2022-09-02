@@ -34,3 +34,15 @@ func TargetLogList() ([]string, error) {
 
 	return strings.Split(string(in), "\n"), nil
 }
+
+//go:embed license/*
+var licenseDir embed.FS
+
+// License return package license
+func License(pkg string) ([]string, error) {
+	in, err := licenseDir.ReadFile(path.Join("license", pkg+".LICENSE"))
+	if err != nil {
+		return nil, err
+	}
+	return strings.Split(string(in), "\n"), nil
+}
