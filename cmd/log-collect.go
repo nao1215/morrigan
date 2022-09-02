@@ -55,15 +55,26 @@ func logCollect(cmd *cobra.Command, args []string) error {
 	}
 
 	// Continue copying even if an error occurs
-	for _, v := range logFileList {
+	if err := collect(logFileList, flag.outputDir); err != nil {
+		return err
+	}
+
+	if err := changeOwnerRecursive(flag.outputDir, ids.sudoUID, ids.sudoGID); err != nil {
+		print.Warn(fmt.Errorf("%s: %w", "owner of the collected log files is root", err))
+	}
+	return nil
+}
+
+func collect(srcList []string, dest string) error {
+	for _, v := range srcList {
 		if !file.IsFile(v) {
 			print.Info("skip. " + v + " does not exist")
 			continue
 		}
 
-		destDir := filepath.Join(flag.outputDir, filepath.Dir(v))
+		destDir := filepath.Join(dest, filepath.Dir(v))
 		if !file.Exists(destDir) {
-			err = os.MkdirAll(destDir, 0755)
+			err := os.MkdirAll(destDir, 0755)
 			if err != nil {
 				return err
 			}
@@ -75,10 +86,6 @@ func logCollect(cmd *cobra.Command, args []string) error {
 			continue
 		}
 		print.Info("copy " + v + " to " + destFile)
-	}
-
-	if err := changeOwnerRecursive(flag.outputDir, ids.sudoUID, ids.sudoGID); err != nil {
-		print.Warn(fmt.Errorf("%s: %w", "owner of the collected log files is root", err))
 	}
 	return nil
 }

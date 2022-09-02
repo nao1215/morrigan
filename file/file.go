@@ -1,6 +1,7 @@
 package file
 
 import (
+	"bufio"
 	"io"
 	"os"
 	"path"
@@ -100,4 +101,27 @@ func Copy(src string, dest string) error {
 		return err
 	}
 	return nil
+}
+
+// ToList returns a list of file contents
+func ToList(path string) ([]string, error) {
+	var strList []string
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	r := bufio.NewReader(f)
+	for {
+		line, err := r.ReadString('\n')
+		if err != nil && err != io.EOF {
+			return nil, err
+		}
+		if err == io.EOF && len(line) == 0 {
+			break
+		}
+		strList = append(strList, line)
+	}
+	return strList, nil
 }

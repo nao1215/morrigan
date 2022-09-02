@@ -2,6 +2,7 @@ package file
 
 import (
 	"os"
+	"reflect"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -128,5 +129,36 @@ func TestCopy(t *testing.T) {
 
 	if err := os.RemoveAll("./testdata/dest"); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestToList(t *testing.T) {
+	type args struct {
+		path string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []string
+		wantErr bool
+	}{
+		{
+			name:    "success",
+			args:    args{path: "testdata/ToList.txt"},
+			want:    []string{"aaa\n", "bbb\n", "ccc"},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := ToList(tt.args.path)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ToList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ToList() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
