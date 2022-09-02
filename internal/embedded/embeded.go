@@ -21,3 +21,16 @@ func WeakPasswdList() ([]string, error) {
 
 	return strings.Split(string(in), "\n"), nil
 }
+
+//go:embed log-collect/target-files.txt
+var targetLogListFile embed.FS
+
+// TargetLogList return log file path list to be collected
+func TargetLogList() ([]string, error) {
+	in, err := targetLogListFile.ReadFile(path.Join("log-collect", "target-files.txt"))
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", "can not open target log file path list to be collected", err)
+	}
+
+	return strings.Split(string(in), "\n"), nil
+}
