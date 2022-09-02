@@ -15,10 +15,11 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
   
 |sub-command | description |forked from or inspired by|
 |:--|:--|:--|
-|log-collect|Collect the logs that exist in the system| - |
+|license||-|
+|log-collect|Print the license of the package (or subcommand) used in the morrigan| - |
 |[netcat](./docs/netcat.md)| listen TCP/UDP ports and send data to remote ports over TCP/UDP|forked from [go-netcat](https://github.com/vfedoroff/go-netcat)|
 |[ping](./docs/ping.md)|send ICMP ECHO_REQUEST to network hosts|forked from [u-root project](https://github.com/u-root/u-root)|
-|[pwcrack](./docs/pwcrack.md)| crack local user password|Naohiro CHIKAMATSU (inspired by [John the ripper](https://www.openwall.com/john/))|
+|[pwcrack](./docs/pwcrack.md)| crack local user password|inspired by [John the ripper](https://www.openwall.com/john/)|
 |[pwscore](./docs/pwscore.md)| [WIP] check password strength|inspired by [libpwquality](https://github.com/libpwquality/libpwquality)|
 |[unshadow](./docs/unshadow.md)| combine password fields in /etc/passwd and /etc/shadow|inspired by [John the ripper](https://www.openwall.com/john/)|
 |[whris](./docs/whris.md)|Displays management information for IPs associated with the domain|forked from [whris](https://github.com/harakeishi/whris)|
