@@ -121,6 +121,4 @@ func printPkgList() {
 		table.Append(v)
 	}
 	table.Render()
-
-	return nil
 }
