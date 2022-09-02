@@ -56,6 +56,7 @@ Contributions are not only related to development. For example, GitHub Star moti
 If you would like to send comments such as "find a bug" or "request for additional features" to the developer, please use one of the following contacts.
 
 - [GitHub Issue](https://github.com/nao1215/morrigan/issues)
+- [Twitter](https://twitter.com/morrigan_pt)
 
 # LICENSE
 The morrigan project is licensed under the terms of [MIT LICENSE](./LICENSE).
