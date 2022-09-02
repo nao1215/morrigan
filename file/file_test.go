@@ -1,6 +1,7 @@
 package file
 
 import (
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -75,4 +76,57 @@ func TestIsHiddenFile(t *testing.T) {
 	assert.Equal(t, false, IsHiddenFile("abcdef"))
 	assert.Equal(t, false, IsHiddenFile(".abcdef"))
 	assert.Equal(t, false, IsHiddenFile(".HiddenDir"))
+}
+
+func TestCopy(t *testing.T) {
+	type args struct {
+		src  string
+		dest string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "success copy file",
+			args: args{
+				src:  "./testdata/Writable.txt",
+				dest: "./testdata/dest/Writable.txt",
+			},
+			wantErr: false,
+		},
+		{
+			name: "copy file that does not exist",
+			args: args{
+				src:  "./testdata/not_exist.txt",
+				dest: "./testdata/dest/not_exist.txt",
+			},
+			wantErr: true,
+		},
+		{
+			name: "destination directory does not exist",
+			args: args{
+				src:  "./testdata/Writable.txt",
+				dest: "./testdata/not_exist/Writable.txt",
+			},
+			wantErr: true,
+		},
+	}
+
+	if err := os.MkdirAll("./testdata/dest", 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := Copy(tt.args.src, tt.args.dest); (err != nil) != tt.wantErr {
+				t.Errorf("Copy() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+
+	if err := os.RemoveAll("./testdata/dest"); err != nil {
+		t.Fatal(err)
+	}
 }

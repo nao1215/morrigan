@@ -1,6 +1,7 @@
 package file
 
 import (
+	"io"
 	"os"
 	"path"
 	"strings"
@@ -78,4 +79,25 @@ func IsHiddenFile(filePath string) bool {
 		return true
 	}
 	return false
+}
+
+// Copy copy file to destination path
+func Copy(src string, dest string) error {
+	s, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer s.Close()
+
+	d, err := os.Create(dest)
+	if err != nil {
+		return err
+	}
+	defer d.Close()
+
+	_, err = io.Copy(d, s)
+	if err != nil {
+		return err
+	}
+	return nil
 }
