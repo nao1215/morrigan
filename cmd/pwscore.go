@@ -42,17 +42,19 @@ func pwscore(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+	return valid(args[0], passwd)
+}
 
+func valid(username, passwd string) error {
 	if err := validWeakPasswd(passwd); err != nil {
-		return nil
+		return err
 	}
 	validLength(passwd)
-	validContainUserName(args[0], passwd)
+	validContainUserName(username, passwd)
 	validContainNumber(passwd)
 	validContainLowerAndUpper(passwd)
 	validContainSymbol(passwd)
 	print.Info("[WIP] Calculate entropy as a measure of password strength")
-
 	return nil
 }
 
@@ -76,7 +78,7 @@ func validContainUserName(username, passwd string) {
 		print.Warn("[Not contain name    ] NG (Better not to contain user name)")
 		return
 	}
-	print.Warn("[Not contain name    ] OK")
+	print.Info("[Not contain name    ] OK")
 }
 
 func validContainNumber(passwd string) {
