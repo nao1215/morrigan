@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -58,7 +59,7 @@ func licenseRun(cmd *cobra.Command, args []string) error {
 
 		license, err := embedded.License(v)
 		if err != nil {
-			print.Err("no such package or subcommand: " + v)
+			return errors.New("no such package or subcommand: " + v)
 		}
 
 		for _, l := range license {

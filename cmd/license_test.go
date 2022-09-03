@@ -108,6 +108,15 @@ func Test_licenseRun(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name: "arugumnent is no exist package",
+			args: args{
+				cmd:  &cobra.Command{},
+				args: []string{"no_exist_pkg"},
+			},
+			want:    []string{""},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -118,11 +127,16 @@ func Test_licenseRun(t *testing.T) {
 			}
 			os.Stdout = pw
 
-			if err := licenseRun(tt.args.cmd, tt.args.args); (err != nil) != tt.wantErr {
+			err = licenseRun(tt.args.cmd, tt.args.args)
+			if (err != nil) != tt.wantErr {
 				t.Errorf("licenseRun() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			pw.Close()
 			os.Stdout = orgStdout
+
+			if err != nil {
+				return
+			}
 
 			buf := bytes.Buffer{}
 			_, err = io.Copy(&buf, pr)
