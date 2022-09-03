@@ -28,6 +28,11 @@ Each subcommand is explained on other pages. We plan to add more subcommands. We
 The subcommands we plan to add to morrigan are as follows:
 - shbin: Obfuscate shell scripts.
 - nmap: Network exploration tool and security / port scanner
+- tcpdump: dump traffic on a network
+- crunch: Generate a dictionary file containing words using the given characters (e.g. 0123456789abcdef)
+- scp: secure copy
+- ftp: File Transfer Protocol
+- cve: Search CVE
   
 ### **Legal Warning**
 > With great power comes great responsibility.
