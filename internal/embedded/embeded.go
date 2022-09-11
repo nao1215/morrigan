@@ -6,9 +6,13 @@ import (
 	"embed"
 	"fmt"
 	"io/fs"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
+
+	"github.com/nao1215/morrigan/file"
+	"github.com/nao1215/morrigan/internal/print"
 )
 
 //go:embed passwd/worst
@@ -38,6 +42,57 @@ func WorstPasswdList() ([]string, error) {
 		return nil, err
 	}
 	return passwdList, err
+}
+
+//go:embed passwd
+var passwordDir embed.FS
+
+// GeneratePasswdListFiles generate password list files that used in morrigan command at target directory.
+func GeneratePasswdListFiles(targetDir string) error {
+	err := fs.WalkDir(passwordDir, ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() {
+			return nil
+		}
+
+		src, err := passwordDir.ReadFile(path)
+		if err != nil {
+			return fmt.Errorf("%s %s: %w", "can not read", path, err)
+		}
+
+		targetDir := strings.TrimSuffix(targetDir, string(filepath.Separator))
+		destDir := strings.Replace(filepath.Dir(path), "passwd", targetDir, 1)
+		if !file.IsDir(destDir) {
+			if !file.Exists(destDir) {
+				err := os.MkdirAll(destDir, 0755)
+				if err != nil {
+					return err
+				}
+			}
+		}
+
+		destFile := filepath.Join(destDir, d.Name())
+		dest, err := os.OpenFile(destFile, os.O_RDWR|os.O_CREATE, 0666)
+		if err != nil {
+			return err
+		}
+		defer dest.Close()
+
+		_, err = dest.WriteString(string(src))
+		if err != nil {
+			return err
+		}
+
+		print.Info("generate " + destFile)
+		return nil
+	})
+
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 //go:embed log-collect/target-files.txt
