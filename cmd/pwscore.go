@@ -59,7 +59,7 @@ func valid(username, passwd string) error {
 }
 
 func validWeakPasswd(passwd string) error {
-	list, err := embedded.WeakPasswdList()
+	list, err := embedded.WorstPasswdList()
 	if err != nil {
 		return err
 	}

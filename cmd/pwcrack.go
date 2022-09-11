@@ -95,7 +95,7 @@ func compareChecksums(encryptedPasswdWithSaltAndID string) (string, error) {
 	lastIndex := strings.LastIndex(encryptedPasswdWithSaltAndID, "$")
 	saltWithID := encryptedPasswdWithSaltAndID[:lastIndex]
 
-	list, err := embedded.WeakPasswdList()
+	list, err := embedded.WorstPasswdList()
 	if err != nil {
 		return "", err
 	}
