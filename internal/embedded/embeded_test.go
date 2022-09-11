@@ -147,7 +147,7 @@ func getWorstPasswordList(t *testing.T) []string {
 	targetDir := "./passwd/worst"
 	fileSystem := os.DirFS(targetDir)
 
-	fs.WalkDir(fileSystem, ".", func(path string, d fs.DirEntry, err error) error {
+	err := fs.WalkDir(fileSystem, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -157,6 +157,10 @@ func getWorstPasswordList(t *testing.T) []string {
 		}
 		return nil
 	})
+
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	fileContents := []string{}
 	for _, v := range fileList {
