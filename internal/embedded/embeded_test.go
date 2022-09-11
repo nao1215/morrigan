@@ -3,49 +3,16 @@
 package embedded
 
 import (
+	"io/fs"
+	"os"
 	"path"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/nao1215/morrigan/file"
 )
-
-func TestWeakPasswdList(t *testing.T) {
-	list, err := file.ToList((path.Join("passwd", "weak.txt")))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	l := []string{}
-	for _, v := range list {
-		l = append(l, strings.ReplaceAll(v, "\n", ""))
-	}
-
-	tests := []struct {
-		name    string
-		want    []string
-		wantErr bool
-	}{
-		{
-			name:    "success",
-			want:    l,
-			wantErr: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := WeakPasswdList()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("WeakPasswdList() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("WeakPasswdList() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 
 func TestTargetLogList(t *testing.T) {
 	list, err := file.ToList((path.Join("log-collect", "target-files.txt")))
@@ -145,4 +112,59 @@ func TestLicense(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestWorstPasswdList(t *testing.T) {
+	tests := []struct {
+		name    string
+		want    []string
+		wantErr bool
+	}{
+		{
+			name:    "success to read",
+			want:    getWorstPasswordList(t),
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := WorstPasswdList()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("WorstPasswdList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("WorstPasswdList() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func getWorstPasswordList(t *testing.T) []string {
+	t.Helper()
+
+	fileList := []string{}
+	targetDir := "./passwd/worst"
+	fileSystem := os.DirFS(targetDir)
+
+	fs.WalkDir(fileSystem, ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if !d.IsDir() {
+			fileList = append(fileList, d.Name())
+		}
+		return nil
+	})
+
+	fileContents := []string{}
+	for _, v := range fileList {
+		d, err := os.ReadFile(filepath.Join(targetDir, v))
+		if err != nil {
+			t.Fatal(err)
+		}
+		fileContents = append(fileContents, strings.Split(string(d), "\n")...)
+	}
+	return fileContents
 }
