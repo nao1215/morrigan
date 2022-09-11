@@ -13,7 +13,10 @@ func Test_pwlist(t *testing.T) {
 	t.Run("Success generate password list", func(t *testing.T) {
 		cmd := &cobra.Command{}
 		cmd.Flags().StringP("output", "o", "password-list", "specifies the output directory")
-		cmd.Flags().Set("output", "testdata/passwd")
+
+		if err := cmd.Flags().Set("output", "testdata/passwd"); err != nil {
+			t.Fatal(err)
+		}
 
 		if err := pwlist(cmd, []string{}); err != nil {
 			t.Errorf("failed to generate password list: %v", err)
