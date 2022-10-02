@@ -136,7 +136,7 @@ func makeZshCompletionFileIfNeeded(cmd *cobra.Command) {
 
 func appendFpathAtZshrcIfNeeded() {
 	const zshFpath = `
-# setting for XXX_NAME_XXX command (auto generate)
+# setting for morrign command (auto generate)
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 `
