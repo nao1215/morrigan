@@ -12,7 +12,7 @@ import (
 
 func TestExecute_Completion(t *testing.T) {
 	t.Run("generate completion file", func(t *testing.T) {
-		os.Args = []string{"gup", "completion"}
+		os.Args = []string{"morrigan", "completion"}
 		Execute()
 
 		bash := filepath.Join(os.Getenv("HOME"), ".bash_completion")
