@@ -7,7 +7,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.1.2
 	github.com/fatih/color v1.15.0
 	github.com/google/go-cmp v0.5.9
-	github.com/likexian/whois v1.14.6
+	github.com/likexian/whois v1.15.0
 	github.com/mattn/go-colorable v0.1.13
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spf13/cobra v1.7.0
