@@ -14,8 +14,8 @@ require (
 	github.com/stretchr/testify v1.8.3
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
 	golang.org/x/crypto v0.9.0
-	golang.org/x/sys v0.8.0
-	golang.org/x/term v0.8.0
+	golang.org/x/sys v0.9.0
+	golang.org/x/term v0.9.0
 )
 
 require (
