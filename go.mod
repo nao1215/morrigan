@@ -13,9 +13,9 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.3
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
-	golang.org/x/crypto v0.11.0
-	golang.org/x/sys v0.10.0
-	golang.org/x/term v0.10.0
+	golang.org/x/crypto v0.12.0
+	golang.org/x/sys v0.11.0
+	golang.org/x/term v0.11.0
 )
 
 require (
