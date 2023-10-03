@@ -7,15 +7,15 @@ require (
 	github.com/cheggaaa/pb/v3 v3.1.4
 	github.com/fatih/color v1.15.0
 	github.com/google/go-cmp v0.5.9
-	github.com/likexian/whois v1.15.0
+	github.com/likexian/whois v1.15.1
 	github.com/mattn/go-colorable v0.1.13
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
-	golang.org/x/crypto v0.11.0
-	golang.org/x/sys v0.10.0
-	golang.org/x/term v0.10.0
+	golang.org/x/crypto v0.12.0
+	golang.org/x/sys v0.11.0
+	golang.org/x/term v0.11.0
 )
 
 require (
@@ -27,6 +27,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/net v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
