@@ -15,7 +15,7 @@ require (
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
 	golang.org/x/crypto v0.13.0
 	golang.org/x/sys v0.13.0
-	golang.org/x/term v0.12.0
+	golang.org/x/term v0.13.0
 )
 
 require (
