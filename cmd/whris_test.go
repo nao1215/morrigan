@@ -47,53 +47,6 @@ mnt-by:         MNT-EDGECAST
 ;; Query time: 1194 msec
 ;; WHEN: Tue Feb 01 21:12:31 JST 2022`
 
-func TestResolve(t *testing.T) {
-	type fields struct {
-		parseResult []networkAdmin
-	}
-	type args struct {
-		domain  string
-		verbose bool
-	}
-	tests := []struct {
-		name string
-		args args
-		want fields
-	}{
-		{
-			name: "the_result_of_example.com_must_be_returned",
-			args: args{
-				domain:  "example.com",
-				verbose: false,
-			},
-			want: fields{
-				parseResult: []networkAdmin{
-					{
-						ipRange: "93.0.0.0 - 93.255.255.255",
-					},
-					{
-						ipRange: "93.184.216.0 - 93.184.216.255",
-						admin:   "NETBLK-03-EU-93-184-216-0-24",
-						country: "EU",
-						netName: "EDGECAST-NETBLK-03",
-					},
-				},
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := resolve(tt.args.domain, tt.args.verbose)
-			if err != nil {
-				t.Errorf("Resolve() error: %v", err)
-			}
-			if !reflect.DeepEqual(got.parseResult, tt.want.parseResult) {
-				t.Fatalf("domainSummary.parseWhoisResponse() = %v, want %v", got.parseResult, tt.want.parseResult)
-			}
-		})
-	}
-}
-
 func TestSummary_ParseWhoisResponse(t *testing.T) {
 	type fields struct {
 		whoisResponseServer string

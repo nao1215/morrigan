@@ -15,11 +15,9 @@ builds:
       - linux
     goarch:
       - amd64
+      - arm64
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    replacements:
-      linux: Linux
-      amd64: x86_64
 checksum:
   name_template: "checksums.txt"
 snapshot:
@@ -30,3 +28,20 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+nfpms:
+  - maintainer: Naohiro CHIKAMATSU <n.chika156@gmail.com>
+    description: morrigan - Penetration Tool Set
+    homepage: https://github.com/nao1215/morrigan
+    license: MIT License
+    formats:
+      - deb
+      - rpm
+      - apk
+brews:
+  - name: morrigan
+    description: morrigan - Penetration Tool Set
+    license: MIT
+    repository:
+      owner: nao1215
+      name: homebrew-tap
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
