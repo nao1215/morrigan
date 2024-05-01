@@ -46,9 +46,15 @@ morrign command is **under development**. There are no features that compromise 
 # How to install
 ### Use "go install"
 If you does not have the golang development environment installed on your system, please install golang from the [golang official website](https://go.dev/doc/install).
+```shell
+go install github.com/nao1215/morrigan@latest
 ```
-$ go install github.com/nao1215/morrigan@latest
+
+### Use homebrew
+```shell
+brew install nao1215/tap/morrigan
 ```
+
 
 ### Install from Package or Binary
 [The release page](https://github.com/nao1215/morrigan/releases) contains packages in .deb, .rpm, and .apk formats.
