@@ -1,6 +1,5 @@
+[![LinuxUnitTest](https://github.com/nao1215/morrigan/actions/workflows/test.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/test.yml)
 [![Build](https://github.com/nao1215/morrigan/actions/workflows/build.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/build.yml)
-[![UnitTest](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/unit_test.yml)
-[![codecov](https://codecov.io/gh/nao1215/morrigan/branch/main/graph/badge.svg?token=AGqQgVDcL1)](https://codecov.io/gh/nao1215/morrigan)
 [![reviewdog](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/morrigan/actions/workflows/reviewdog.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/morrigan)](https://goreportcard.com/report/github.com/nao1215/morrigan)
 <div align="center">
@@ -46,9 +45,15 @@ morrign command is **under development**. There are no features that compromise 
 # How to install
 ### Use "go install"
 If you does not have the golang development environment installed on your system, please install golang from the [golang official website](https://go.dev/doc/install).
+```shell
+go install github.com/nao1215/morrigan@latest
 ```
-$ go install github.com/nao1215/morrigan@latest
+
+### Use homebrew
+```shell
+brew install nao1215/tap/morrigan
 ```
+
 
 ### Install from Package or Binary
 [The release page](https://github.com/nao1215/morrigan/releases) contains packages in .deb, .rpm, and .apk formats.
