@@ -3,7 +3,7 @@ module github.com/nao1215/morrigan
 go 1.21
 
 require (
-	github.com/briandowns/spinner v1.23.0
+	github.com/briandowns/spinner v1.23.1
 	github.com/cheggaaa/pb/v3 v3.1.5
 	github.com/fatih/color v1.17.0
 	github.com/google/go-cmp v0.6.0
