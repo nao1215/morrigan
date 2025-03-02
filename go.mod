@@ -10,7 +10,7 @@ require (
 	github.com/likexian/whois v1.15.5
 	github.com/mattn/go-colorable v0.1.14
 	github.com/olekukonko/tablewriter v0.0.5
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
 	golang.org/x/crypto v0.32.0
@@ -26,7 +26,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
