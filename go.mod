@@ -6,7 +6,7 @@ require (
 	github.com/briandowns/spinner v1.23.2
 	github.com/cheggaaa/pb/v3 v3.1.7
 	github.com/fatih/color v1.18.0
-	github.com/google/go-cmp v0.6.0
+	github.com/google/go-cmp v0.7.0
 	github.com/likexian/whois v1.15.5
 	github.com/mattn/go-colorable v0.1.14
 	github.com/olekukonko/tablewriter v0.0.5
