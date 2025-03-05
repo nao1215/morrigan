@@ -1,6 +1,7 @@
 module github.com/nao1215/morrigan
 
 go 1.21
+toolchain go1.23.7
 
 require (
 	github.com/briandowns/spinner v1.23.2
@@ -13,9 +14,9 @@ require (
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
 	github.com/yeka/zip v0.0.0-20180914125537-d046722c6feb
-	golang.org/x/crypto v0.32.0
-	golang.org/x/sys v0.30.0
-	golang.org/x/term v0.28.0
+	golang.org/x/crypto v0.36.0
+	golang.org/x/sys v0.31.0
+	golang.org/x/term v0.30.0
 )
 
 require (
